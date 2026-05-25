@@ -13,6 +13,29 @@
   backdrop-filter: blur(18px);
 }
 
+.toggleButton {
+  display: none;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  color: var(--secondary-text);
+  cursor: pointer;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+}
+
+.toggleButton:hover {
+  color: var(--primary-text);
+  background: var(--surface-raised);
+  border-color: var(--border-strong);
+}
+
+.toggleButton:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
 .brand,
 .profile,
 .navLink,
@@ -231,21 +254,111 @@
 
 @media (max-width: 760px) {
   .container {
-    position: relative;
-    width: 100%;
-    min-height: auto;
-    padding: 14px;
-    border-right: 0;
-    border-bottom: 1px solid var(--border);
+    position: sticky;
+    width: 76px;
+    min-width: 76px;
+    min-height: 100dvh;
+    padding: 10px 8px;
+    overflow: hidden;
+    border-right: 1px solid var(--border);
+    border-bottom: 0;
+    transition: width 180ms ease, min-width 180ms ease;
+  }
+
+  .mobileExpanded {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 40;
+    width: min(250px, 72vw);
+    min-width: min(250px, 72vw);
+    box-shadow: 20px 0 44px rgba(15, 23, 42, 0.18);
+  }
+
+  .toggleButton {
+    display: grid;
+    flex: 0 0 40px;
+    margin: 0 auto 12px;
+  }
+
+  .brand {
+    justify-content: center;
+    gap: 0;
+    min-height: 52px;
+    padding: 6px;
+  }
+
+  .mobileExpanded .brand {
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .logoFrame {
+    flex-basis: 44px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .brandText,
+  .profileText,
+  .navLabel,
+  .navLink > span:not(.activeIndicator),
+  .utilityLink > span {
+    display: none;
+  }
+
+  .mobileExpanded .brandText,
+  .mobileExpanded .profileText,
+  .mobileExpanded .navLabel,
+  .mobileExpanded .navLink > span:not(.activeIndicator),
+  .mobileExpanded .utilityLink > span {
+    display: flex;
+  }
+
+  .profile {
+    justify-content: center;
+    gap: 0;
+    margin: 16px 0;
+    padding: 8px;
+  }
+
+  .mobileExpanded .profile {
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .profileImage {
+    flex-basis: 40px;
+    width: 40px;
+    height: 40px;
   }
 
   .navList {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    grid-template-columns: none;
   }
 
-  .walletCard,
+  .navLink,
+  .utilityLink {
+    justify-content: center;
+    gap: 0;
+    min-height: 44px;
+    padding: 0;
+  }
+
+  .mobileExpanded .navLink,
+  .mobileExpanded .utilityLink {
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 0 10px;
+  }
+
   .footerActions {
+    display: flex;
+    padding-top: 10px;
+  }
+
+  .walletCard {
     display: none;
   }
 }

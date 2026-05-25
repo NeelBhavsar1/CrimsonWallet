@@ -1,12 +1,12 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Sidebar.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowUpDown, Backpack, ChartCandlestick, LayoutDashboard, LogOut, Settings, Target } from 'lucide-react'
+import { ArrowUpDown, Backpack, ChartCandlestick, LayoutDashboard, LogOut, Menu, Settings, Target, X } from 'lucide-react'
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -41,14 +41,32 @@ const itemVariants = {
 
 const Sidebar = () => {
   const pathname = usePathname()
+  const [isMobileExpanded, setIsMobileExpanded] = useState(false)
   const shouldReduceMotion = useReducedMotion()
   const hoverMotion = shouldReduceMotion ? undefined : { x: 2 }
   const tapMotion = shouldReduceMotion ? undefined : { scale: 0.985 }
+  const closeSidebar = () => setIsMobileExpanded(false)
 
   return (
-    <motion.aside className={styles.container} aria-label="Primary navigation" variants={sidebarVariants} initial={shouldReduceMotion ? false : 'hidden'} animate="show">
+    <motion.aside
+      className={`${styles.container} ${isMobileExpanded ? styles.mobileExpanded : ''}`}
+      aria-label="Primary navigation"
+      variants={sidebarVariants}
+      initial={shouldReduceMotion ? false : 'hidden'}
+      animate="show"
+    >
+      <button
+        className={styles.toggleButton}
+        type="button"
+        aria-label={isMobileExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
+        aria-expanded={isMobileExpanded}
+        onClick={() => setIsMobileExpanded((current) => !current)}
+      >
+        {isMobileExpanded ? <X size={18} /> : <Menu size={18} />}
+      </button>
+
       <motion.div variants={itemVariants} whileHover={hoverMotion} whileTap={tapMotion}>
-        <Link href="/dashboard" className={styles.brand} aria-label="CrimsonWallet dashboard">
+        <Link href="/dashboard" className={styles.brand} aria-label="CrimsonWallet dashboard" onClick={closeSidebar}>
           <span className={styles.logoFrame}>
             <Image src="/crimsonlogo.png" alt="" width={80} height={80} className={styles.logoImage} />
           </span>
@@ -61,7 +79,7 @@ const Sidebar = () => {
       </motion.div>
 
       <motion.div variants={itemVariants} whileHover={hoverMotion} whileTap={tapMotion}>
-        <Link href="/profile" className={styles.profile}>
+        <Link href="/profile" className={styles.profile} onClick={closeSidebar}>
           <Image className={styles.profileImage} src="/pfpimage.jpg" alt="Neel Bhavsar profile" width={44} height={44} />
           <span className={styles.profileText}>
             <span className={styles.profileName}>Neel Bhavsar</span>
@@ -79,7 +97,13 @@ const Sidebar = () => {
             return (
               <motion.li key={href} variants={itemVariants} whileHover={hoverMotion} whileTap={tapMotion}>
 
-                <Link href={href} className={`${styles.navLink} ${isActive ? styles.active : ''}`} aria-current={isActive ? 'page' : undefined}>
+                <Link
+                  href={href}
+                  className={`${styles.navLink} ${isActive ? styles.active : ''}`}
+                  aria-current={isActive ? 'page' : undefined}
+                  title={label}
+                  onClick={closeSidebar}
+                >
                   {isActive && <motion.span className={styles.activeIndicator} layoutId="sidebar-active-indicator" transition={{ type: 'spring', stiffness: 420, damping: 34 }} />}
                   <Icon size={20} strokeWidth={2} />
                   <span>{label}</span>
@@ -92,12 +116,12 @@ const Sidebar = () => {
       </nav>
 
       <motion.div className={styles.footerActions} variants={itemVariants}>
-        <Link href="/settings" className={styles.utilityLink}>
+        <Link href="/settings" className={styles.utilityLink} onClick={closeSidebar}>
           <Settings size={18} />
           <span>Settings</span>
         </Link>
         
-        <Link href="/logout" className={styles.utilityLink}>
+        <Link href="/logout" className={styles.utilityLink} onClick={closeSidebar}>
           <LogOut size={18} />
           <span>Sign out</span>
         </Link>

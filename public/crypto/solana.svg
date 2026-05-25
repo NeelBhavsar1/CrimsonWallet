@@ -1,0 +1,11 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="32" cy="32" r="32" fill="#111827"/>
+  <path d="M20.2 20.2c.4-.4.9-.6 1.5-.6h27.2c1 0 1.5 1.2.8 1.9l-5.4 5.4c-.4.4-.9.6-1.5.6H15.6c-1 0-1.5-1.2-.8-1.9l5.4-5.4Z" fill="url(#a)"/>
+  <path d="M20.2 37.1c.4-.4.9-.6 1.5-.6h27.2c1 0 1.5 1.2.8 1.9l-5.4 5.4c-.4.4-.9.6-1.5.6H15.6c-1 0-1.5-1.2-.8-1.9l5.4-5.4Z" fill="url(#b)"/>
+  <path d="M43.8 28.6c-.4-.4-.9-.6-1.5-.6H15.1c-1 0-1.5 1.2-.8 1.9l5.4 5.4c.4.4.9.6 1.5.6h27.2c1 0 1.5-1.2.8-1.9l-5.4-5.4Z" fill="url(#c)"/>
+  <defs>
+    <linearGradient id="a" x1="14" x2="50" y1="27.5" y2="19.5"><stop stop-color="#9945FF"/><stop offset="1" stop-color="#14F195"/></linearGradient>
+    <linearGradient id="b" x1="14" x2="50" y1="44.5" y2="36.5"><stop stop-color="#9945FF"/><stop offset="1" stop-color="#14F195"/></linearGradient>
+    <linearGradient id="c" x1="14" x2="50" y1="28" y2="36"><stop stop-color="#14F195"/><stop offset="1" stop-color="#9945FF"/></linearGradient>
+  </defs>
+</svg>
