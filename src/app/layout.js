@@ -1,5 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import {Inter } from "next/font/google";
+import { Inter, Geist_Mono } from "next/font/google";
 import Sidebar from "../components/Sidebar/Sidebar";
 import "./globals.css";
 
