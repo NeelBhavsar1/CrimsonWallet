@@ -1,0 +1,437 @@
+.marketPage {
+  display: grid;
+  gap: 22px;
+}
+
+.hero,
+.chartPanel,
+.tablePanel,
+.toolbar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+.hero {
+  display: flex;
+  gap: 20px;
+  align-items: end;
+  justify-content: space-between;
+  padding: 26px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 10%, transparent), transparent 48%),
+    var(--surface);
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin-top: 8px;
+  font-size: clamp(2.1rem, 5vw, 4.8rem);
+  line-height: 0.95;
+}
+
+.hero p {
+  max-width: 680px;
+  margin-top: 12px;
+  color: var(--secondary-text);
+  line-height: 1.6;
+}
+
+.heroStat {
+  display: grid;
+  gap: 4px;
+  min-width: 156px;
+  padding: 14px;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.heroStat span,
+.chartStats span {
+  color: var(--secondary-text);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.heroStat strong {
+  font-size: 1.15rem;
+}
+
+.toolbar {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px;
+}
+
+.searchBox {
+  display: flex;
+  flex: 1;
+  gap: 10px;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
+  color: var(--secondary-text);
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.searchBox input {
+  width: 100%;
+  min-width: 0;
+  color: var(--primary-text);
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.toolbarMeta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  color: var(--secondary-text);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.refreshButton,
+.errorBox button {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 12px;
+  color: var(--inverse-text);
+  cursor: pointer;
+  background: var(--accent);
+  border: 0;
+  border-radius: 8px;
+}
+
+.refreshButton:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.spinning {
+  animation: spin 900ms linear infinite;
+}
+
+.chartPanel {
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+}
+
+.chartHeader {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.selectedCoin {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.selectedCoin img {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+}
+
+.selectedCoin h2 {
+  margin-top: 4px;
+  font-size: clamp(1.35rem, 2.5vw, 2rem);
+}
+
+.selectedCoin span,
+.chartHint {
+  color: var(--secondary-text);
+}
+
+.selectedStats {
+  display: grid;
+  gap: 6px;
+  justify-items: end;
+}
+
+.selectedStats strong {
+  font-size: clamp(1.2rem, 2vw, 1.75rem);
+}
+
+.largeChart {
+  height: 340px;
+  min-width: 0;
+}
+
+.tablePanel {
+  overflow: hidden;
+}
+
+.tableScroll {
+  overflow-x: auto;
+}
+
+.cryptoTable {
+  width: 100%;
+  min-width: 1040px;
+  border-collapse: collapse;
+}
+
+.cryptoTable th,
+.cryptoTable td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.cryptoTable th {
+  color: var(--secondary-text);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.cryptoTable tr {
+  cursor: pointer;
+}
+
+.cryptoTable tbody tr:hover,
+.selectedRow {
+  background: var(--surface-muted);
+}
+
+.assetCell {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+}
+
+.assetCell img {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+}
+
+.assetCell div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.assetCell strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.assetCell span {
+  color: var(--secondary-text);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.sortButton {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  color: inherit;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
+
+.activeSort {
+  color: var(--accent);
+}
+
+.positive,
+.negative {
+  width: fit-content;
+  padding: 5px 8px;
+  font-style: normal;
+  font-weight: 850;
+  border-radius: 999px;
+}
+
+.positive {
+  color: var(--success);
+  background: var(--success-soft);
+}
+
+.negative {
+  color: var(--loss);
+  background: var(--loss-soft);
+}
+
+.sparkPositive,
+.sparkNegative {
+  width: 120px;
+  height: 40px;
+}
+
+.sparkPositive polyline,
+.sparkNegative polyline {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+}
+
+.sparkPositive {
+  color: var(--success);
+}
+
+.sparkNegative {
+  color: var(--loss);
+}
+
+.noSparkline {
+  color: var(--secondary-text);
+  font-size: 0.8rem;
+}
+
+.mobileCards {
+  display: none;
+}
+
+.errorBox {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  color: var(--loss);
+  background: var(--loss-soft);
+  border: 1px solid color-mix(in srgb, var(--loss) 24%, var(--border));
+  border-radius: 8px;
+}
+
+.errorBox p {
+  color: var(--secondary-text);
+}
+
+.loadingGrid {
+  display: grid;
+  gap: 10px;
+}
+
+.skeletonRow {
+  min-height: 70px;
+  overflow: hidden;
+  background: linear-gradient(90deg, var(--surface-muted), var(--surface), var(--surface-muted));
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero,
+  .toolbar,
+  .chartHeader {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .toolbarMeta {
+    justify-content: space-between;
+  }
+
+  .largeChart {
+    height: 280px;
+  }
+}
+
+@media (max-width: 760px) {
+  .marketPage {
+    gap: 16px;
+  }
+
+  .hero,
+  .chartPanel,
+  .toolbar {
+    padding: 16px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 11vw, 3.2rem);
+  }
+
+  .tableScroll {
+    display: none;
+  }
+
+  .mobileCards {
+    display: grid;
+    gap: 10px;
+    padding: 8px;
+  }
+
+  .mobileCard {
+    display: grid;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    color: var(--primary-text);
+    text-align: left;
+    cursor: pointer;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .selectedMobileCard {
+    border-color: color-mix(in srgb, var(--accent) 42%, var(--border));
+    box-shadow: var(--focus-ring);
+  }
+
+  .mobileStats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mobileStats span {
+    font-weight: 900;
+  }
+
+  .mobileCard small {
+    color: var(--secondary-text);
+    line-height: 1.5;
+  }
+
+  .sparkPositive,
+  .sparkNegative {
+    width: 100%;
+    max-width: 220px;
+  }
+
+  .selectedStats {
+    justify-items: start;
+  }
+}
