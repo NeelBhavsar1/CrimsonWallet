@@ -1,4 +1,7 @@
+'use client'
+
 import Image from 'next/image'
+import { motion, useReducedMotion } from 'framer-motion'
 import styles from './page.module.css'
 
 const timeFrames = [
@@ -49,10 +52,49 @@ const holdings = [
 const performancePoints = '16,194 78,176 140,182 202,146 264,154 326,118 388,126 450,84 512,96 574,58 636,66 698,34'
 const performanceArea = `16,230 ${performancePoints} 698,230`
 
+const pageVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
+  },
+}
+
+const panelVariants = {
+  hidden: { opacity: 0, y: 18 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.36, ease: [0.22, 1, 0.36, 1] },
+  },
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 14, scale: 0.985 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+  },
+}
+
 const DashboardPage = () => {
+  const shouldReduceMotion = useReducedMotion()
+  const hoverMotion = shouldReduceMotion ? undefined : { y: -3 }
+  const tapMotion = shouldReduceMotion ? undefined : { scale: 0.99 }
+
   return (
-    <section className={styles.dashboard}>
-      <div className={styles.balancePanel}>
+    <motion.section
+      className={styles.dashboard}
+      variants={pageVariants}
+      initial={shouldReduceMotion ? false : 'hidden'}
+      animate="show"
+    >
+      <motion.div className={styles.balancePanel} variants={panelVariants}>
         <div className={styles.balanceCopy}>
           <p className={styles.eyebrow}>Portfolio overview</p>
           <h1>Total Balance</h1>
@@ -61,26 +103,26 @@ const DashboardPage = () => {
 
         <div className={styles.profitGrid} aria-label="Portfolio profit by time period">
           {timeFrames.map((frame) => (
-            <div className={styles.profitCard} key={frame.label}>
+            <motion.div className={styles.profitCard} key={frame.label} variants={cardVariants} whileHover={hoverMotion} whileTap={tapMotion}>
               <span>{frame.label}</span>
               <strong>{frame.value}</strong>
               <small>{frame.change}</small>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
-      <div className={styles.sectionHeader}>
+      <motion.div className={styles.sectionHeader} variants={panelVariants}>
         <div>
           <p className={styles.eyebrow}>Holdings</p>
           <h2>Invested cryptocurrencies</h2>
         </div>
         <span>4 assets</span>
-      </div>
+      </motion.div>
 
-      <div className={styles.holdingsGrid}>
+      <motion.div className={styles.holdingsGrid} variants={pageVariants}>
         {holdings.map((coin) => (
-          <article className={styles.coinCard} key={coin.symbol}>
+          <motion.article className={styles.coinCard} key={coin.symbol} variants={cardVariants} whileHover={hoverMotion} whileTap={tapMotion}>
             <div className={styles.coinHeader}>
               <Image src={coin.icon} alt={`${coin.name} logo`} width={42} height={42} />
               <div>
@@ -111,11 +153,11 @@ const DashboardPage = () => {
               </div>
               <em>{coin.change}</em>
             </div>
-          </article>
+          </motion.article>
         ))}
-      </div>
+      </motion.div>
 
-      <section className={styles.performancePanel} aria-labelledby="performance-heading">
+      <motion.section className={styles.performancePanel} aria-labelledby="performance-heading" variants={panelVariants}>
         <div className={styles.performanceHeader}>
           <div>
             <p className={styles.eyebrow}>Performance</p>
@@ -149,8 +191,22 @@ const DashboardPage = () => {
               <line x1="16" x2="704" y1="196" y2="196" />
             </g>
             <polyline className={styles.performanceFill} points={performanceArea} fill="url(#portfolio-fill)" />
-            <polyline className={styles.performanceLine} points={performancePoints} />
-            <circle className={styles.chartDot} cx="698" cy="34" r="6" />
+            <motion.polyline
+              className={styles.performanceLine}
+              points={performancePoints}
+              initial={shouldReduceMotion ? false : { pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
+            />
+            <motion.circle
+              className={styles.chartDot}
+              cx="698"
+              cy="34"
+              r="6"
+              initial={shouldReduceMotion ? false : { scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.28, delay: 0.95 }}
+            />
           </svg>
         </div>
 
@@ -162,8 +218,8 @@ const DashboardPage = () => {
           <span>Apr 23</span>
           <span>Today</span>
         </div>
-      </section>
-    </section>
+      </motion.section>
+    </motion.section>
   )
 }
 
