@@ -1,12 +1,7 @@
-import React from 'react'
-import Sidebar from '../components/Sidebar/Sidebar'
+import { redirect } from 'next/navigation'
 
-const page = () => {
-  return (
-    <div >
-      <Sidebar />
-    </div>
-  )
+const Page = () => {
+  redirect('/dashboard')
 }
 
-export default page
+export default Page

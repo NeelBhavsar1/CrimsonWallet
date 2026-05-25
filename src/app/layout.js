@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import {Inter } from "next/font/google";
+import Sidebar from "../components/Sidebar/Sidebar";
 import "./globals.css";
 
 
@@ -20,8 +21,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${geistMono.variable}'}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${inter.variable} ${geistMono.variable}`}>
+      <body>
+        <div className="appShell">
+          <Sidebar />
+          <main className="appMain">{children}</main>
+        </div>
+      </body>
     </html>
   );
 }
